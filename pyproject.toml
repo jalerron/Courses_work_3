@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "courses-work-3"
+version = "0.1.0"
+description = ""
+authors = ["Nikitin Ivan <ivannikitin9853@gmail.com>"]
+readme = "README.md"
+packages = [{include = "courses_work_3"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
