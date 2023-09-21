@@ -8,7 +8,7 @@ def load_data(file):
     with open(file, 'r', encoding='utf-8') as file:
         data = json.load(file)
 
-    operation_data = []
+    operation_data = []  # list for all data from file
 
     for data_ in data:
         operation_data.append(data_)
