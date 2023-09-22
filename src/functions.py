@@ -60,7 +60,7 @@ def change_number_card(card_number):
     number = ''.join(number)
     card_name = ' '.join(card_name)
 
-    mask_card = f'{card_name} {number[:4]} {number[4:6]}** **** {number[12:]}'
+    mask_card = f'{card_name} {number[:4]} {number[4:6]}** **** {number[-4:]}'
 
     return mask_card
 
@@ -71,7 +71,17 @@ def change_check(check):
     :param check: number of check
     :return: mask check
     """
-    return f'**{check[-4:]}'
+    number = []
+    to = []
+    for elem in check.split(' '):
+        if elem.isdigit():
+            number.append(elem)
+        else:
+            to.append(elem)
+
+    number = ''.join(number)
+    to = ' '.join(to)
+    return f'{to} **{number[-4:]}'
 
 
 def get_formatted_operation(data):
@@ -91,7 +101,7 @@ def get_formatted_operation(data):
             changed_number_card = change_number_card(data_['from'])
             from_to = f'{changed_number_card} -> {changed_check}'
         else:
-            from_to = f'To {changed_check}'
+            from_to = f'-> {changed_check}'
         date = f'{format_date} {data_["description"]}'
         amount = f'{data_["operationAmount"]["amount"]} {data_["operationAmount"]["currency"]["name"]}'
         dict_operation = {'date': date, 'from_to': from_to, 'amount': amount}
