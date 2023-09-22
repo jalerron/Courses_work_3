@@ -66,3 +66,12 @@ def change_number_card(card_number):
     mask_card = f'{card_name} {number[:4]} {number[4:6]}** **** {number[12:]}'
 
     return mask_card
+
+
+def change_check(check):
+    """
+    mask check
+    :param check: number of check
+    :return: mask check
+    """
+    return f'**{check[-4:]}'
