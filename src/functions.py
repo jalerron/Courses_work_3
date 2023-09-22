@@ -37,12 +37,10 @@ def conclusion_data(data, last_operation=5):
     conclusion_list = []
 
     for data_ in data:
-        while len(conclusion_list) <= last_operation-1:
-            if data_["state"] == "EXECUTED":
-                conclusion_list.append(data_)
-            print(len(conclusion_list))
+        if data_["state"] == "EXECUTED":
+            conclusion_list.append(data_)
 
-    return conclusion_list
+    return conclusion_list[:last_operation]
 
 
 def change_number_card(card_number):
@@ -54,7 +52,6 @@ def change_number_card(card_number):
     number = []
     card_name = []
     for elem in card_number.split(' '):
-        print(elem)
         if elem.isdigit():
             number.append(elem)
         else:
@@ -75,3 +72,29 @@ def change_check(check):
     :return: mask check
     """
     return f'**{check[-4:]}'
+
+
+def get_formatted_operation(data):
+    """
+    print operation
+    :param data:
+    :return: formatted print
+    """
+
+    formatted_operations = []
+
+    for data_ in data:
+        date_operation = datetime.fromisoformat(data_['date'])
+        format_date = datetime.strftime(date_operation, '%d''.''%m''.''%Y')
+        changed_check = change_check(data_['to'])
+        if data_.get('from', False) != False:
+            changed_number_card = change_number_card(data_['from'])
+            from_to = f'{changed_number_card} -> {changed_check}'
+        else:
+            from_to = f'To {changed_check}'
+        date = f'{format_date} {data_["description"]}'
+        amount = f'{data_["operationAmount"]["amount"]} {data_["operationAmount"]["currency"]["name"]}'
+        dict_operation = {'date': date, 'from_to': from_to, 'amount': amount}
+        formatted_operations.append(dict_operation)
+
+    return formatted_operations
