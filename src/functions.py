@@ -43,3 +43,26 @@ def conclusion_data(data, last_operation=5):
             print(len(conclusion_list))
 
     return conclusion_list
+
+
+def change_number_card(card_number):
+    """
+    mask number card
+    :param card_number: card_number
+    :return: mask number card
+    """
+    number = []
+    card_name = []
+    for elem in card_number.split(' '):
+        print(elem)
+        if elem.isdigit():
+            number.append(elem)
+        else:
+            card_name.append(elem)
+
+    number = ''.join(number)
+    card_name = ' '.join(card_name)
+
+    mask_card = f'{card_name} {number[:4]} {number[4:6]}** **** {number[12:]}'
+
+    return mask_card
