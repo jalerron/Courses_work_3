@@ -18,8 +18,6 @@ def load_data(file):
     return operation_data
 
 
-# print(load_data('../data/operations.json'))
-
 def sort_data_date(data):
     """
     Sort data by date
@@ -27,3 +25,21 @@ def sort_data_date(data):
     sorted_list = sorted(data, key=lambda data_: data_['date'], reverse=True)
 
     return sorted_list
+
+
+def conclusion_data(data, last_operation=5):
+    """
+    Conclusion last X operation
+    :param data: sorted list operation
+    :param last_operation: how much last operation need. 5 - default
+    :return: list conclusion operation
+    """
+    conclusion_list = []
+
+    for data_ in data:
+        while len(conclusion_list) <= last_operation-1:
+            if data_["state"] == "EXECUTED":
+                conclusion_list.append(data_)
+            print(len(conclusion_list))
+
+    return conclusion_list
