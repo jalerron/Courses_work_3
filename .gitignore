@@ -1,2 +1,8 @@
 .idea/
 /idea/
+__pycache__
+.coverage
+poetry.lock
+tests/.coverage
+utils/.coverage
+.pytest_cache/
