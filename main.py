@@ -1,4 +1,4 @@
-from src.functions import load_data, sort_data_date, conclusion_data, get_formatted_operation
+from utils.functions import load_data, sort_data_date, conclusion_data, get_formatted_operation
 from pathlib import Path
 
 ROOT_PATH = Path(__file__).parent
