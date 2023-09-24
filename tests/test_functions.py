@@ -1,18 +1,30 @@
 from utils import functions
 from pathlib import Path
 
-ROOT_PATH = Path(__file__).parent
-DATA_PATH = Path.joinpath(ROOT_PATH, 'data')
-DATA_LOAD_PATH = Path.joinpath(DATA_PATH, 'test_load_data.json')
-TEST_SORTED_PATH = Path.joinpath(DATA_PATH, 'test_sorted_data.json')
-TEST_SORT_PATH = Path.joinpath(DATA_PATH, 'test_sort_data.json')
-TEST_CONCLUSION_PATH = Path.joinpath(DATA_PATH, 'test_conclusion_data.json')
-TEST_FORMATTED_PATH = Path.joinpath(DATA_PATH, 'test_formatted_operation.json')
+def make_path(file):
+    """
+    make root path to file
+    :param file: filename
+    :return: full root path for file
+    """
+    ROOT_PATH = Path(__file__).parent
+    DATA_PATH = Path.joinpath(ROOT_PATH, 'data')
+    TEST_PATH = Path.joinpath(DATA_PATH, file)
 
-sort_data = functions.load_data(TEST_SORT_PATH)
-sorted_data = functions.load_data(TEST_SORTED_PATH)
-conclusion_data = functions.load_data(TEST_CONCLUSION_PATH)
-formatted_data = functions.load_data(TEST_FORMATTED_PATH)
+    return TEST_PATH
+
+# DATA_LOAD_PATH = Path.joinpath(DATA_PATH, 'test_load_data.json')
+# TEST_SORTED_PATH = Path.joinpath(DATA_PATH, 'test_sorted_data.json')
+# TEST_SORT_PATH = Path.joinpath(DATA_PATH, 'test_sort_data.json')
+# TEST_CONCLUSION_PATH = Path.joinpath(DATA_PATH, 'test_conclusion_data.json')
+# TEST_FORMATTED_PATH = Path.joinpath(DATA_PATH, 'test_formatted_operation.json')
+
+
+TEST_LOAD_DATA = make_path('test_load_data.json')
+sort_data = functions.load_data(make_path('test_sort_data.json'))
+sorted_data = functions.load_data(make_path('test_sorted_data.json'))
+conclusion_data = functions.load_data(make_path('test_conclusion_data.json'))
+formatted_data = functions.load_data(make_path('test_formatted_operation.json'))
 
 
 card_number = 'MasterCard 7158300734726758'
@@ -22,7 +34,7 @@ from_func_check = 'Счет **9589'
 
 
 def test_load_data():
-    assert functions.load_data(DATA_LOAD_PATH) == [{"card": "visa"}]
+    assert functions.load_data(TEST_LOAD_DATA) == [{"card": "visa"}]
 
 
 def test_sort_data_date():
