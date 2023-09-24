@@ -97,8 +97,11 @@ def get_formatted_operation(data):
         date_operation = datetime.fromisoformat(data_['date'])
         format_date = datetime.strftime(date_operation, '%d''.''%m''.''%Y')
         changed_check = change_check(data_['to'])
-        if data_.get('from', False) != False:
-            changed_number_card = change_number_card(data_['from'])
+        if data_.get('from', False):
+            if 'Счет' in data_['from']:
+                changed_number_card = change_check(data_['from'])
+            else:
+                changed_number_card = change_number_card(data_['from'])
             from_to = f'{changed_number_card} -> {changed_check}'
         else:
             from_to = f'-> {changed_check}'
